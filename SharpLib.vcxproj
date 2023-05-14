@@ -128,6 +128,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Excetion.cpp" />
+    <ClCompile Include="OutOfIndexExcetion.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="IDisposable.h" />
     <ClCompile Include="SharpLib.cpp" />
@@ -135,6 +137,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Array.h" />
+    <ClInclude Include="classes.h" />
+    <ClInclude Include="Excetion.h" />
+    <ClInclude Include="OutOfIndexExcetion.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="ICollection.h" />
     <ClInclude Include="Enumerator.h" />

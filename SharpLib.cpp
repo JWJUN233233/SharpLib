@@ -10,22 +10,18 @@ using namespace SharpLib;
 using namespace SharpLib::IO;
 int main()
 {
-    String s1 = "hello";
-    String s2 = "hello";
-    std::cout << (s1 == s2) << std::endl;
-    //Array<char>* string = new Array<char>();
-    //MemoryStream stream = MemoryStream();
-    //stream.WriteByte('1');
-    //stream.WriteByte('2');
-    //stream.WriteByte('3');
-    //stream.WriteByte('4');
-    //stream.WriteByte('5');
-    //stream.WriteByte('\0');
-    //std::cout << stream.ToArray().ToCArray() << std::endl;
-    //stream.SetPostion(1);
-    //stream.Read(string, 0, stream.GetLength());
-    //std::cout << string->ToCArray() << std::endl;
-
+    Array<byte>* bts = new Array<byte>();
+    MemoryStream stream = MemoryStream();
+    stream.WriteByte((byte)0x01);
+    stream.WriteByte((byte)0x02);
+    stream.WriteByte((byte)0x03);
+    stream.WriteByte((byte)0x04);
+    stream.WriteByte((byte)0x05);
+    std::cout << stream.ToArray().ToCArray() << std::endl;
+    stream.SetPostion(0);
+    stream.Read(bts, 0, stream.GetLength());
+    stream.Seek(-1, SeekOrigin::End);
+    byte bt = stream.ReadByte();
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单

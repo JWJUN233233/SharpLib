@@ -50,7 +50,19 @@ namespace SharpLib::IO {
 	}
 	int MemoryStream::Seek(int offset, SeekOrigin origin)
 	{
-		return 0;
+		switch (origin)
+		{
+		case SharpLib::IO::Begin:
+			_postion = offset;
+			break;
+		case SharpLib::IO::Current:
+			_postion += offset;
+			break;
+		case SharpLib::IO::End:
+			_postion = GetLength() + offset;
+			break;
+		}
+		return _postion;
 	}
 	bool MemoryStream::GetCanWrite()
 	{
@@ -64,7 +76,7 @@ namespace SharpLib::IO {
 	}
 	void MemoryStream::Write(Array<byte> buffer, int offset, int count)
 	{
-
+		int writeLen = 0;
 	}
 	int MemoryStream::GetLength()
 	{

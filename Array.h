@@ -2,7 +2,8 @@
 #include <corecrt_malloc.h>
 #include "ICollection.h"
 #include "Enumerator.h"
-#include <cstdarg>
+#include "OutOfIndexExcetion.h"
+using SharpLib::Excetion::OutOfIndexExcetion;
 namespace SharpLib::Collection{
 	template <typename T>
 	int GetCArrayLength(T* CArray);
@@ -13,8 +14,7 @@ namespace SharpLib::Collection{
 	template <typename T> class Array : public ICollection<T>, public IEnumerable<T>
 	{
 	public:
-		explicit Array(int len = 0);
-		Array(T value ...);
+	    Array();
 		Array(Array<T>& Array);
 		~Array();
 		Enumerator<T> GetEnumerator();
@@ -26,7 +26,6 @@ namespace SharpLib::Collection{
 		long GetLongLength();
 		T* ToCArray();
 		T& operator[](int i);
-		const T& operator[](int i) const;
 		void operator = (Array<T> value);
 		operator T* ();
 	private:
@@ -37,7 +36,6 @@ namespace SharpLib::Collection{
 		int size = _msize((void*)CArray);
 		return size / sizeof(T);
 	}
-
 	template <typename T>
 	inline T* CopyCArray(T* CArray) {
 		int arraylen = GetCArrayLength(CArray);
@@ -47,7 +45,6 @@ namespace SharpLib::Collection{
 		}
 		return tmp;
 	}
-
 	template <typename T>
 	inline void SetCArrayLength(T** CArray, int length) {
 		int CopyLen = 0;
@@ -66,21 +63,9 @@ namespace SharpLib::Collection{
 		*CArray = tmp;
 	}
 	template<typename T>
-	inline Array<T>::Array(int len)
+	inline Array<T>::Array()
 	{
-		_value = new T[len];
-	}
-	template<typename T>
-	inline Array<T>::Array(T value ...)
-	{
-		va_list arg_ptr;
-		va_start(arg_ptr, value);
-		_value = new T[value];
-		for (int i = 0; i < value; i++)
-		{
-			operator[](i) = va_arg(arg_ptr, T);
-		}
-		va_end(arg_ptr);
+		_value = new T[0];
 	}
 	template<typename T>
 	inline Array<T>::Array(Array<T>& Array)
@@ -136,14 +121,11 @@ namespace SharpLib::Collection{
 	template<typename T>
 	inline T& Array<T>::operator[](int i)
 	{
-		return _value[i];
+		if (i < GetLength()) {
+			return _value[i];
+		}
+		throw OutOfIndexExcetion((achar*)_T("OutOfIndex in an array"), GetLength(), i);
 	}
-	template<typename T>
-	inline const T& Array<T>::operator[](int i) const
-	{
-		return _value[i];
-	}
-
 	template<typename T>
 	inline void Array<T>::operator=(Array<T> value)
 	{

@@ -22,6 +22,12 @@
     <Filter Include="源文件\io">
       <UniqueIdentifier>{3b17b3ad-a734-4856-ab82-24948125a275}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\excetion">
+      <UniqueIdentifier>{bd59ba85-cceb-4675-a20f-f0d79cc4ee1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Excetion">
+      <UniqueIdentifier>{5d499006-55ec-4de7-a0d3-897b7790a373}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SharpLib.cpp">
@@ -35,6 +41,12 @@
     </ClCompile>
     <ClCompile Include="String.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Excetion.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="OutOfIndexExcetion.cpp">
+      <Filter>源文件\Excetion</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -54,6 +66,15 @@
       <Filter>头文件\collection</Filter>
     </ClInclude>
     <ClInclude Include="String.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Excetion.h">
+      <Filter>头文件\excetion</Filter>
+    </ClInclude>
+    <ClInclude Include="OutOfIndexExcetion.h">
+      <Filter>头文件\excetion</Filter>
+    </ClInclude>
+    <ClInclude Include="classes.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
